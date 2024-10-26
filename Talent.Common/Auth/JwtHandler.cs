@@ -37,10 +37,9 @@ namespace Talent.Common.Auth
             var nowUtc = DateTime.UtcNow;
             var expires = nowUtc.AddMinutes(_options.ExpiryMinutes);
 
-            if (isSignUp == true)
-            {
-                expires = nowUtc.AddHours(24);
-            }
+            
+            expires = nowUtc.AddHours(48);
+         
 
             //expires = nowUtc.AddMinutes(0.5);
 
@@ -51,6 +50,7 @@ namespace Talent.Common.Auth
                 new Claim(JwtRegisteredClaimNames.UniqueName, userId.ToString()),
                 new Claim(ClaimTypes.Role, userRole)
             };
+            Console.WriteLine($"Issuer: {_options.Issuer}");
             var payload = new JwtPayload
             {
                 { "userId", userId },

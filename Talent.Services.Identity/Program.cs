@@ -16,12 +16,25 @@ namespace Talent.Services.Identity
     {
         public static void Main(string[] args)
         {
-            ServiceHost.Create<Startup>(args)
-                .UseRabbitMq()
-                .SubcribeToCommand<AuthenticateUser>()
-                .SubcribeToCommand<CreateUser>()
+            // Explicitly add launchSettings.json and build the configuration
+            var config = new ConfigurationBuilder()
+                .SetBasePath(AppContext.BaseDirectory)
+                .AddJsonFile("Properties/launchSettings.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables()
+                .AddCommandLine(args)
+                .Build();
+
+            // Get the URLs from the configuration, defaulting to a specific URL if not set
+            var hostUrl = config["ASPNETCORE_URLS"] ?? "http://0.0.0.0:60880";
+
+            // Pass the configuration and hostUrl to ServiceHost.Create
+            ServiceHost.Create<Startup>(args, hostUrl)
+                // .UseRabbitMq()
+                // .SubcribeToCommand<AuthenticateUser>()
+                // .SubcribeToCommand<CreateUser>()
                 .Build()
                 .Run();
         }
+
     }
 }

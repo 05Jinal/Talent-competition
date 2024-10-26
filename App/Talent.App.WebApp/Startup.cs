@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;  
 
 namespace Talent.App.WebApp
 {
@@ -21,15 +22,16 @@ namespace Talent.App.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            // Replace AddMvc() with AddControllersWithViews()
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env) // Use IWebHostEnvironment
         {
             if (env.IsDevelopment())
             {
-                app.UseBrowserLink();
+                // Remove UseBrowserLink() as it is deprecated
                 app.UseDeveloperExceptionPage();
             }
             else
@@ -39,12 +41,15 @@ namespace Talent.App.WebApp
 
             app.UseStaticFiles();
 
-            app.UseMvc(routes =>
+            // Use modern endpoint routing
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
-                    "default",
-                    "{*url}",
-                    new { controller = "Home", action = "index" }
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{*url}",
+                    defaults: new {controller = "Home", action = "Index"}
                 );
             });
         }

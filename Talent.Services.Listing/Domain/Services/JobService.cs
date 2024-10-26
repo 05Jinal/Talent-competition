@@ -1,6 +1,4 @@
-﻿
-using Talent.Services.Talent.Domain.Contracts;
-using Talent.Common.Contracts;
+﻿using Talent.Common.Contracts;
 using Talent.Common.Models;
 using System;
 using System.Collections.Generic;
@@ -10,8 +8,9 @@ using MongoDB.Driver;
 using MongoDB.Bson;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using Talent.Services.Listing.Domain.Contracts;
 
-namespace Talent.Services.Talent.Domain.Services
+namespace Talent.Services.Listing.Domain.Services
 {
     public class JobService:IJobService
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Talent.Services.Talent.Domain.Contracts
+namespace Talent.Services.Listing.Domain.Contracts
 {
     public interface ITalentService
     {

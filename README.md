@@ -9,27 +9,9 @@ Please follow the instructions below to understand how to get started. If you ha
 * MVP Studio React Training.pdf can be found here
 ReactExamples.zip can be found [here](https://drive.google.com/file/d/1dXZeb3hmMsYbE1hmGEkb4_hyOkNiAbPa/view?usp=sharing)
 
-React coding examples in ReactExamples.zip:
-*ReactHelloWorld.html: Printing hello world using React
-*ReactTimeline.css: CSS File for Timeline example
-*ReactTimeline.html: React components and container example
-*ReactTimelinePassObject.html: Passing a prop as an attribute and javascript object example
-*ReactTimelinePassArray.html : Passing an array of javascript objects example
-
-### Do’s and don’ts
-See the [coding guidelines](http://git.mvp.studio/talent-competition/talent-competition/wikis/guides/coding-guidelines) and [FAQ](http://git.mvp.studio/talent-competition/talent-competition/wikis/guides/faqs)  
-Please try not to add styles inside the jsx file. Instead, please add your styles to TalentTheme.css.  
-Please use ES6, jsx, use state  
-Limit your use of javascript or jQuery - jQuery is required for AJAX, but very little else.  
-Use AJAX to get/send data to the controller  
-Please use plain javascript not typescript  
-
 **Don't add any new fields to the Models or add new fields to the documents in the database.**  
 For example,  don't add any new fields to the User or Job models.
-
-**Note : Make sure that you have Visual Studio 2017 installed in your computer.
-Visual Studio 2015 does not work with ReactJS**
-
+ 
 ### Install react, babel, webpack, js tokens and react tags:
 * Find the folder that contains webpack.config.js in the solution explorer
 * Right click on the folder and select 'Open Folder in File Explorer'

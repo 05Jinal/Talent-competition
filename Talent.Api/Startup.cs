@@ -24,6 +24,7 @@ using System.Security.Principal;
 using Talent.Common.Security;
 using Talent.Api.Domain.Contracts;
 using Talent.Api.Domain.Services;
+using Microsoft.Extensions.Hosting; // Add this for IWebHostEnvironment
 
 namespace Talent.Api
 {
@@ -43,24 +44,28 @@ namespace Talent.Api
             {
                 options.AddPolicy("AllowWebAppAccess", builder =>
                 {
-                    builder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .AllowCredentials();
+                    builder.SetIsOriginAllowed(_ => true) // Allows all origins
+                           .AllowAnyMethod()
+                           .AllowAnyHeader()
+                           .AllowCredentials();
                 });
             });
+
             services.Configure<FormOptions>(x =>
             {
                 x.ValueLengthLimit = int.MaxValue;
                 x.MultipartBodyLengthLimit = int.MaxValue;
                 x.MultipartHeadersLengthLimit = int.MaxValue;
             });
-            services.AddMvc()
-                .AddJsonOptions(options =>
+
+            // Replace AddMvc() with AddControllers() and AddNewtonsoftJson()
+            services.AddControllers()
+                .AddNewtonsoftJson(options =>
                 {
                     options.SerializerSettings.ContractResolver
                         = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();
                 });
+
             services.AddJwt(Configuration);
             services.AddMongoDB(Configuration);
             services.AddRabbitMq(Configuration);
@@ -68,28 +73,39 @@ namespace Talent.Api
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             Func<IServiceProvider, IPrincipal> getPrincipal =
-                     (sp) => sp.GetService<IHttpContextAccessor>().HttpContext.User;
-            services.AddScoped(typeof(Func<IPrincipal>), sp => {
-                Func<IPrincipal> func = () => {
-                    return getPrincipal(sp);
-                };
+                (sp) => sp.GetService<IHttpContextAccessor>().HttpContext.User;
+            services.AddScoped(typeof(Func<IPrincipal>), sp =>
+            {
+                Func<IPrincipal> func = () => getPrincipal(sp);
                 return func;
             });
+
             services.AddScoped<IUserAppContext, UserAppContext>();
             services.AddScoped<IFileService, FileService>();
             services.AddScoped<IProfileService, ProfileService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env) // Change to IWebHostEnvironment
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc();
+            app.UseRouting();
+
+            app.UseCors("AllowWebAppAccess");
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }

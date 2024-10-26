@@ -27,19 +27,19 @@ namespace Talent.Common.Services
 
         public async Task<string> GetFileURL(string id, FileType type)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
         public async Task<string> SaveFile(IFormFile file, FileType type)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
         public async Task<bool> DeleteFile(string id, FileType type)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
@@ -48,13 +48,13 @@ namespace Talent.Common.Services
 
         private async Task<string> SaveFileGeneral(IFormFile file, string bucket, string folder, bool isPublic)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
         
         private async Task<bool> DeleteFileGeneral(string id, string bucket)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
         #endregion

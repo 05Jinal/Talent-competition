@@ -137,7 +137,7 @@ namespace Talent.Services.Profile.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "talent")]
         public async Task<IActionResult> GetLanguages()
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
@@ -145,7 +145,7 @@ namespace Talent.Services.Profile.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "talent")]
         public ActionResult AddLanguage([FromBody] AddLanguageViewModel language)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
@@ -153,7 +153,7 @@ namespace Talent.Services.Profile.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "talent")]
         public async Task<ActionResult> UpdateLanguage([FromBody] AddLanguageViewModel language)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
@@ -161,7 +161,7 @@ namespace Talent.Services.Profile.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "talent")]
         public async Task<ActionResult> DeleteLanguage([FromBody] AddLanguageViewModel language)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
@@ -169,7 +169,7 @@ namespace Talent.Services.Profile.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "talent")]
         public async Task<IActionResult> GetSkills()
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
@@ -177,7 +177,7 @@ namespace Talent.Services.Profile.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "talent")]
         public ActionResult AddSkill([FromBody]AddSkillViewModel skill)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
@@ -185,7 +185,7 @@ namespace Talent.Services.Profile.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "talent")]
         public async Task<IActionResult> UpdateSkill([FromBody]AddSkillViewModel skill)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
@@ -193,7 +193,7 @@ namespace Talent.Services.Profile.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "talent")]
         public async Task<IActionResult> DeleteSkill([FromBody]AddSkillViewModel skill)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
@@ -201,7 +201,7 @@ namespace Talent.Services.Profile.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "talent")]
         public async Task<IActionResult> getCertification()
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
@@ -209,7 +209,7 @@ namespace Talent.Services.Profile.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "talent")]
         public ActionResult addCertification([FromBody] AddCertificationViewModel certificate)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
@@ -217,7 +217,7 @@ namespace Talent.Services.Profile.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "talent")]
         public async Task<IActionResult> UpdateCertification([FromBody] AddCertificationViewModel certificate)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
@@ -225,7 +225,7 @@ namespace Talent.Services.Profile.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "talent")]
         public async Task<IActionResult> DeleteCertification([FromBody] AddCertificationViewModel certificate)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
@@ -242,7 +242,7 @@ namespace Talent.Services.Profile.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "talent")]
         public async Task<ActionResult> UpdateProfilePhoto()
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
@@ -251,7 +251,7 @@ namespace Talent.Services.Profile.Controllers
         public async Task<ActionResult> UpdateTalentCV()
         {
             IFormFile file = Request.Form.Files[0];
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
@@ -260,7 +260,7 @@ namespace Talent.Services.Profile.Controllers
         public async Task<IActionResult> UpdateTalentVideo()
         {
             IFormFile file = Request.Form.Files[0];
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
@@ -268,7 +268,7 @@ namespace Talent.Services.Profile.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "talent")]
         public async Task<IActionResult> GetInfo()
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
@@ -277,7 +277,7 @@ namespace Talent.Services.Profile.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "talent")]
         public async Task<IActionResult> AddInfo([FromBody] DescriptionViewModel pValue)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
@@ -285,7 +285,7 @@ namespace Talent.Services.Profile.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "talent")]
         public async Task<IActionResult> GetEducation()
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
@@ -293,7 +293,7 @@ namespace Talent.Services.Profile.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "talent")]
         public IActionResult AddEducation([FromBody]AddEducationViewModel model)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
@@ -301,7 +301,7 @@ namespace Talent.Services.Profile.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "talent")]
         public async Task<IActionResult> UpdateEducation([FromBody]AddEducationViewModel model)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
@@ -309,7 +309,7 @@ namespace Talent.Services.Profile.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "talent")]
         public async Task<IActionResult> DeleteEducation([FromBody] AddEducationViewModel model)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
@@ -376,7 +376,7 @@ namespace Talent.Services.Profile.Controllers
         public async Task<ActionResult> UpdateEmployerPhoto()
         {
             IFormFile file = Request.Form.Files[0];
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
@@ -385,7 +385,7 @@ namespace Talent.Services.Profile.Controllers
         public async Task<IActionResult> UpdateEmployerVideo()
         {
             IFormFile file = Request.Form.Files[0];
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
@@ -393,14 +393,14 @@ namespace Talent.Services.Profile.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "employer, recruiter")]
         public async Task<ActionResult> GetWorkSample(string Id)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
         [HttpGet("getEmployerProfileImages")]
         public ActionResult GetWorkSampleImage(string Id)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
         

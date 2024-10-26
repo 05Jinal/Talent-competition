@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Talent.Common.Models;
 
-namespace Talent.Services.Talent.Domain.Contracts
+namespace Talent.Services.Listing.Domain.Contracts
 {
     public interface IJobService
     {

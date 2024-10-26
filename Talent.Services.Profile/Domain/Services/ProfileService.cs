@@ -45,19 +45,19 @@ namespace Talent.Services.Profile.Domain.Services
 
         public bool AddNewLanguage(AddLanguageViewModel language)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
         public async Task<TalentProfileViewModel> GetTalentProfile(string Id)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
         public async Task<bool> UpdateTalentProfile(TalentProfileViewModel model, string updaterId)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
@@ -222,50 +222,50 @@ namespace Talent.Services.Profile.Domain.Services
 
         public async Task<bool> AddEmployerVideo(string employerId, IFormFile file)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
         public async Task<bool> UpdateTalentPhoto(string talentId, IFormFile file)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
         public async Task<bool> AddTalentVideo(string talentId, IFormFile file)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
 
         }
 
         public async Task<bool> RemoveTalentVideo(string talentId, string videoName)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
         public async Task<bool> UpdateTalentCV(string talentId, IFormFile file)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
         public async Task<IEnumerable<string>> GetTalentSuggestionIds(string employerOrJobId, bool forJob, int position, int increment)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
         public async Task<IEnumerable<TalentSnapshotViewModel>> GetTalentSnapshotList(string employerOrJobId, bool forJob, int position, int increment)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
         public async Task<IEnumerable<TalentSnapshotViewModel>> GetTalentSnapshotList(IEnumerable<string> ids)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
@@ -273,37 +273,37 @@ namespace Talent.Services.Profile.Domain.Services
 
         public async Task<IEnumerable<TalentSuggestionViewModel>> GetFullTalentList()
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
         public IEnumerable<TalentMatchingEmployerViewModel> GetEmployerList()
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
         public async Task<IEnumerable<TalentMatchingEmployerViewModel>> GetEmployerListByFilterAsync(SearchCompanyModel model)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
         public async Task<IEnumerable<TalentSuggestionViewModel>> GetTalentListByFilterAsync(SearchTalentModel model)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
         public async Task<IEnumerable<TalentSuggestion>> GetSuggestionList(string employerOrJobId, bool forJob, string recruiterId)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
         public async Task<bool> AddTalentSuggestions(AddTalentSuggestionList selectedTalents)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
@@ -341,19 +341,19 @@ namespace Talent.Services.Profile.Domain.Services
 
         public async Task<IEnumerable<ClientViewModel>> GetClientListAsync(string recruiterId)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
 
         public async Task<ClientViewModel> ConvertToClientsViewAsync(Client client, string recruiterId)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
          
         public async Task<int> GetTotalTalentsForClient(string clientId, string recruiterId)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
 
         }

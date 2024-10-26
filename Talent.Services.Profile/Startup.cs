@@ -22,6 +22,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Hosting; // Added for IWebHostEnvironment
 using Talent.Common.Aws;
 
 namespace Talent.Services.Profile
@@ -42,24 +43,28 @@ namespace Talent.Services.Profile
             {
                 options.AddPolicy("AllowWebAppAccess", builder =>
                 {
-                    builder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .AllowCredentials();
+                    builder
+                        .WithOrigins("http://localhost:61772","http://localhost:60998") // Specify your allowed origins here
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials();  
                 });
             });
+
             services.Configure<FormOptions>(x =>
             {
                 x.ValueLengthLimit = int.MaxValue;
                 x.MultipartBodyLengthLimit = int.MaxValue;
                 x.MultipartHeadersLengthLimit = int.MaxValue;
             });
-            services.AddMvc()
-                .AddJsonOptions(options =>
-            {
-                options.SerializerSettings.ContractResolver
-                    = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();
-            });
+
+            services.AddControllers()
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.ContractResolver
+                        = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();
+                });
+
             services.AddJwt(Configuration);
             services.AddMongoDB(Configuration);
             services.AddRabbitMq(Configuration);
@@ -68,28 +73,60 @@ namespace Talent.Services.Profile
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             Func<IServiceProvider, IPrincipal> getPrincipal =
-                     (sp) => sp.GetService<IHttpContextAccessor>().HttpContext.User;
-            services.AddScoped(typeof(Func<IPrincipal>), sp => {
-                Func<IPrincipal> func = () => {
-                    return getPrincipal(sp);
-                };
+                (sp) => sp.GetService<IHttpContextAccessor>().HttpContext.User;
+            services.AddScoped(typeof(Func<IPrincipal>), sp =>
+            {
+                Func<IPrincipal> func = () => getPrincipal(sp);
                 return func;
             });
+
             services.AddScoped<IUserAppContext, UserAppContext>();
             services.AddScoped<IProfileService, ProfileService>();
             services.AddScoped<IFileService, FileService>();
+
+            services.AddLogging(logging =>
+            {
+                logging.AddConsole();
+                logging.AddDebug();
+            });
+
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            // Add this middleware to handle OPTIONS requests globally
+            app.Use(async (context, next) =>
+            {
+                if (context.Request.Method == "OPTIONS")
+                {
+                    context.Response.Headers.Add("Access-Control-Allow-Origin",
+                        "*"); // Replace * with specific origin if needed
+                    context.Response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+                    context.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Authorization");
+                    context.Response.Headers.Add("Access-Control-Allow-Credentials", "true"); // Only if needed
+                    context.Response.StatusCode = 200;
+                    await context.Response.CompleteAsync();
+                }
+                else
+                {
+                    await next();
+                }
+            });
+
             app.UseCors("AllowWebAppAccess");
-            app.UseMvc();
+
+            app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }

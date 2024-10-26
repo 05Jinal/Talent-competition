@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Talent.Common.Contracts;
 using Talent.Common.Models;
 using Talent.Common.Security;
-using Talent.Services.Talent.Domain.Contracts;
+using Talent.Services.Listing.Domain.Contracts;
 
-namespace Talent.Services.Talent.Domain.Services
+namespace Talent.Services.Listing.Domain.Services
 {
     public class TalentService : ITalentService
     {
@@ -44,7 +44,7 @@ namespace Talent.Services.Talent.Domain.Services
 
         public async Task SetWatchingTalent(string employerId, string talentId, bool isWatching)
         {
-            //Your code here;
+            //TODO: Your code here;
             throw new NotImplementedException();
         }
     }

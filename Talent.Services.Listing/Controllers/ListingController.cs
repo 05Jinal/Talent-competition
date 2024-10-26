@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Talent.Common.Contracts;
 using MongoDB.Driver;
-using Talent.Services.Talent.Domain.Contracts;
+using Talent.Services.Listing.Domain.Contracts;
 using Talent.Services.Profile.Domain.Contracts;
 
 namespace Talent.Services.Listing.Controllers

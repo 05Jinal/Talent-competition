@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talent.Services.Profile", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talent.Common", "Talent.Common\Talent.Common.csproj", "{2A420619-D095-4C16-8227-55A531C15F79}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talent.Services.Talent", "Talent.Services.Listing\Talent.Services.Talent.csproj", "{9E222117-5319-4B18-8182-169819F320C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talent.Services.Listing", "Talent.Services.Listing\Talent.Services.Listing.csproj", "{9E222117-5319-4B18-8182-169819F320C6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{259B7C6E-8D2C-4A72-B345-CB221F73E228}"
 EndProject
