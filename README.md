@@ -27,7 +27,6 @@ Install npm util packages:
 * Run webpack:
 `cd C:\Talent\Talent\App\Talent.App.WebApp\wwwroot\js\react`
 `npm run build`
-* Launch Talent.WebApp project in Visual Studio. Register an account using your email address and log in.
 
 ### Project Structure  
 [Check the wiki](http://git.mvp.studio/talent-competition/talent-competition/wikis/guides/project-structure) for more details.
