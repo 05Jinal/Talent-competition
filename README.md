@@ -46,7 +46,21 @@ Install npm util packages:
 * Forgetting to clear the cache
 
 ### How to connect to the database
-[Click here](http://git.mvp.studio/talent-competition/talent-competition/wikis/guides/mongo-db) for more details.
+
+**Step 1: Start MongoDB**
+```bash
+docker-compose up -d
+```
+
+**Step 2: Start Microservices**
+```bash
+dotnet run --project Talent.Services.Identity
+dotnet run --project Talent.Services.Profile
+dotnet run --project Talent.Services.Listing
+dotnet run --project Talent.Api
+```
+
+**Note:** If you have local MongoDB running, stop it first with `killall mongod` (Mac) or `net stop MongoDB` (Windows).
 
 ## Competition task
 
