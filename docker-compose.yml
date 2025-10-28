@@ -1,0 +1,30 @@
+services:
+  mongo:
+    image: mongo:4.4
+    container_name: talent-mongodb
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+      MONGO_INITDB_DATABASE: TalentDb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - talent-network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/TalentDb -u TalentAppUser -p m4tWXQC --authenticationDatabase TalentDb --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  mongodb_data:
+    driver: local
+
+networks:
+  talent-network:
+    driver: bridge
