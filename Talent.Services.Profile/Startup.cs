@@ -16,14 +16,13 @@ using Talent.Services.Profile.Handler;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Microsoft.Extensions.Hosting; // Added for IWebHostEnvironment
+using Microsoft.Extensions.Hosting;
 using Talent.Common.Aws;
+using Microsoft.AspNetCore.Http;
 
 namespace Talent.Services.Profile
 {
@@ -36,21 +35,22 @@ namespace Talent.Services.Profile
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // CORS: allow frontend access
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowWebAppAccess", builder =>
                 {
                     builder
-                        .WithOrigins("http://localhost:61772","http://localhost:60998") // Specify your allowed origins here
-                        .AllowAnyMethod()
+                        .WithOrigins("http://localhost:61771") // React frontend URL
                         .AllowAnyHeader()
-                        .AllowCredentials();  
+                        .AllowAnyMethod()
+                        .AllowCredentials();
                 });
             });
 
+            // Form options for large file uploads
             services.Configure<FormOptions>(x =>
             {
                 x.ValueLengthLimit = int.MaxValue;
@@ -58,6 +58,7 @@ namespace Talent.Services.Profile
                 x.MultipartHeadersLengthLimit = int.MaxValue;
             });
 
+            // Controllers + JSON
             services.AddControllers()
                 .AddNewtonsoftJson(options =>
                 {
@@ -65,10 +66,12 @@ namespace Talent.Services.Profile
                         = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();
                 });
 
+            // Add services
             services.AddJwt(Configuration);
             services.AddMongoDB(Configuration);
             services.AddRabbitMq(Configuration);
             services.AddAws(Configuration);
+
             services.AddScoped<ICommandHandler<AuthenticateUser>, AuthenticateUserHandler>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IAuthenticationService, AuthenticationService>();
@@ -91,38 +94,20 @@ namespace Talent.Services.Profile
                 logging.AddConsole();
                 logging.AddDebug();
             });
-
         }
 
-         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            // Add this middleware to handle OPTIONS requests globally
-            app.Use(async (context, next) =>
-            {
-                if (context.Request.Method == "OPTIONS")
-                {
-                    context.Response.Headers.Add("Access-Control-Allow-Origin",
-                        "*"); // Replace * with specific origin if needed
-                    context.Response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-                    context.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Authorization");
-                    context.Response.Headers.Add("Access-Control-Allow-Credentials", "true"); // Only if needed
-                    context.Response.StatusCode = 200;
-                    await context.Response.CompleteAsync();
-                }
-                else
-                {
-                    await next();
-                }
-            });
+            app.UseRouting();
+
 
             app.UseCors("AllowWebAppAccess");
 
-            app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
 

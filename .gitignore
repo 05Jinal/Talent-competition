@@ -1,0 +1,14 @@
+# Node
+App/Talent.App.WebApp/wwwroot/js/react/node_modules/
+
+# React build output
+App/Talent.App.WebApp/wwwroot/js/react/dist/
+
+# .NET build folders
+**/bin/
+**/obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo

@@ -25,7 +25,7 @@ namespace Talent.Services.Profile
                 .Build();
 
             // Get the URLs from the configuration, defaulting to a specific URL if not set
-            var hostUrl = config["ASPNETCORE_URLS"] ?? "http://0.0.0.0:60880";
+            var hostUrl = config["ASPNETCORE_URLS"] ?? "http://0.0.0.0:60290";
             
             ServiceHost.Create<Startup>(args, hostUrl)
                // .UseRabbitMq()
