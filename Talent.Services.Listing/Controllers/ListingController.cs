@@ -13,10 +13,13 @@ using Talent.Common.Contracts;
 using MongoDB.Driver;
 using Talent.Services.Listing.Domain.Contracts;
 using Talent.Services.Profile.Domain.Contracts;
+using ThirdParty.Json.LitJson;
 
 namespace Talent.Services.Listing.Controllers
 {
-    [Route("listing/[controller]")]
+
+    [ApiController]
+    [Route("listing/listing")]
     public class ListingController : Controller
     {
         private readonly IBusClient _busClient;
@@ -47,8 +50,10 @@ namespace Talent.Services.Listing.Controllers
             _talentService = talentService;
         }
 
+        
         [HttpPost("createUpdateJob")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "employer, recruiter")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "employer, recruiter")]
+        [AllowAnonymous]
         public IActionResult CreateUpdateJob([FromBody]Job jobData)
         {
             try
@@ -56,7 +61,8 @@ namespace Talent.Services.Listing.Controllers
                 string message = "";
                 if (jobData.Id == "")
                 {
-                    jobData.EmployerID = _userAppContext.CurrentUserId;
+                    //jobData.EmployerID = _userAppContext.CurrentUserId;
+                    jobData.EmployerID = "test-employer-id";
                     jobData.Status = JobStatus.Active;
                     jobData.CreatedOn = DateTime.UtcNow;
                     string newJobID = _jobService.CreateJob(jobData);
@@ -81,6 +87,14 @@ namespace Talent.Services.Listing.Controllers
                 return Json(new { Success = false, Message = "Error while adding/updating job" });
             }
         }
+        // test
+        [HttpGet("whoami")]
+        [AllowAnonymous]
+        public IActionResult WhoAmI()
+        {
+            return Ok("THIS IS LISTING SERVICE");
+        }
+
 
         [HttpGet("GetJobByToEdit")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "employer, recruiter")]
@@ -217,6 +231,11 @@ namespace Talent.Services.Listing.Controllers
                 return Json(new { Success = false, Message = "Error while retriving Jobs" });
             }
         }
+
+       
+
+
+
         [HttpPost("closeJob")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "employer, recruiter")]
         public async Task<IActionResult> CloseJob([FromBody]string id)

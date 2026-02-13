@@ -37,17 +37,22 @@ export default class ManageJob extends React.Component {
         //your functions go here
     };
 
+    //made changes in this part
     init() {
-        let loaderData = TalentUtil.deepCopy(this.state.loaderData)
-        loaderData.isLoading = false;
-        this.setState({ loaderData });//comment this
+        let loaderData = TalentUtil.deepCopy(this.state.loaderData);
+        loaderData.isLoading = true;
+        this.setState({ loaderData }, () => {//comment this
 
-        //set loaderData.isLoading to false after getting data
-        //this.loadData(() =>
-        //    this.setState({ loaderData })
-        //)
+            //set loaderData.isLoading to false after getting data
+            this.loadData(() => {
+                loaderData.isLoading = false;
+                this.setState({ loaderData });
+            });
+           
+       });
+
         
-        //console.log(this.state.loaderData)
+        console.log(this.state.loaderData)
     }
 
     componentDidMount() {
@@ -60,6 +65,9 @@ export default class ManageJob extends React.Component {
        // your ajax call and other logic goes here
     }
 
+
+
+
     loadNewData(data) {
         var loader = this.state.loaderData;
         loader.isLoading = true;
@@ -68,7 +76,7 @@ export default class ManageJob extends React.Component {
             this.loadData(() => {
                 loader.isLoading = false;
                 this.setState({
-                    loadData: loader
+                    loaderData: loader
                 })
             })
         });
@@ -77,7 +85,14 @@ export default class ManageJob extends React.Component {
     render() {
         return (
             <BodyWrapper reload={this.init} loaderData={this.state.loaderData}>
-               <div className ="ui container">Your table goes here</div>
+                <div className="ui container">
+                    {this.state.loadJobs.length === 0 ? (
+                        <p>No jobs found</p>
+                    ) : (
+                        this.state.loadJobs.map(job => (
+                            <JobSummaryCard key={job.id} job={job} />
+                        ))
+                    )}                    </div>
             </BodyWrapper>
         )
     }

@@ -97,19 +97,24 @@ export default class CreateJob extends React.Component {
         var jobData = this.state.jobData;
         console.log("data to save:", jobData);
         //jobData.jobDetails.startDate = jobData.jobDetails.startDate.toDate();
+        jobData.jobDetails.startDate = new Date(jobData.jobDetails.startDate);
+
+
+
+
         console.log("date:", jobData.jobDetails.startDate);
         var cookies = Cookies.get('talentAuthToken');   
         $.ajax({
-            url: 'http://localhost:51689/listing/listing/createUpdateJob',
+            url: 'http://localhost:51689/listing/Listing/createUpdateJob',
             headers: {
                 'Authorization': 'Bearer ' + cookies,
                 'Content-Type': 'application/json'
             },
-            dataType:'json',
+            dataType: 'json',
             type: "post",
             data: JSON.stringify(jobData),
             success: function (res) {
-                if (res.success == true) {
+                if (res.Success == true) {
                     TalentUtil.notification.show(res.message, "success", null, null);
                     window.location = "/ManageJobs";
                    
@@ -189,7 +194,7 @@ export default class CreateJob extends React.Component {
                                                         expiryDate={this.state.jobData.expiryDate}
                                                         jobDetails={this.state.jobData.jobDetails}
                                                         updateStateData={this.updateStateData}
-                                                        createClick={this.addUpdateJob}
+                                                        createJob={this.addUpdateJob} 
                                                     />
                                                 </div>
                                             </div>

@@ -12,7 +12,7 @@ using Talent.Services.Listing.Domain.Contracts;
 
 namespace Talent.Services.Listing.Domain.Services
 {
-    public class JobService:IJobService
+    public class JobService : IJobService
     {
         IRepository<Employer> _employerRepository;
         IFileService _fileService;
@@ -59,6 +59,24 @@ namespace Talent.Services.Listing.Domain.Services
             job.Status = status;
             await _jobRepository.Update(job);
         }
-        
+
+        public Task CreateUpdateJob(JobData job)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task CreateUpdateJob(Job job)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task CreateUpdateJob(Contracts.JobData job)
+        {
+            throw new NotImplementedException();
+        }
+
+        public class JobData
+        {
+        }
     }
 }
