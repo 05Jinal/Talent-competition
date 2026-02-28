@@ -51,7 +51,7 @@ namespace Talent.Services.Listing.Controllers
         }
 
         
-        [HttpPost("createUpdateJob")]
+        [HttpPost("CreateUpdateJob")]
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "employer, recruiter")]
         [AllowAnonymous]
         public IActionResult CreateUpdateJob([FromBody]Job jobData)
@@ -88,11 +88,23 @@ namespace Talent.Services.Listing.Controllers
             }
         }
         // test
-        [HttpGet("whoami")]
-        [AllowAnonymous]
-        public IActionResult WhoAmI()
+        //[HttpGet("whoami")]
+        //[AllowAnonymous]
+        //public IActionResult WhoAmI()
+        //{
+        //    return Ok("THIS IS LISTING SERVICE");
+        //}
+
+
+        [ApiController]
+        [Route("api/test")]
+        public class TestController : ControllerBase
         {
-            return Ok("THIS IS LISTING SERVICE");
+            [HttpGet]
+            public IActionResult Get()
+            {
+                return Ok("It works");
+            }
         }
 
 

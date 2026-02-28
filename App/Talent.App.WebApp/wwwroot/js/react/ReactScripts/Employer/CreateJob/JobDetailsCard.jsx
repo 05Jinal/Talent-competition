@@ -68,9 +68,13 @@ export class JobDetailsCard extends React.Component {
         const { jobType } = jobDetails;
 
         // Default expiry date 14 days ahead
-        const expiryDate = this.props.expiryDate instanceof moment
-            ? this.props.expiryDate
-            : moment().add(14, 'days');
+        //const expiryDate = this.props.expiryDate instanceof moment
+        //    ? this.props.expiryDate
+        //    : moment().add(14, 'days');
+        const expiryDate =
+            jobDetails.expiryDate instanceof Date && !isNaN(jobDetails.expiryDate)
+                ? jobDetails.expiryDate
+                : new Date(Date.now() + 14 * 24 * 60 * 60 * 1000);
 
         return (
             <div className="ui segment">
@@ -126,28 +130,50 @@ export class JobDetailsCard extends React.Component {
                                     <div className="summary">
                                         *Start Date:
                                         <br />
+                                        {/*<DatePicker*/}
+                                        {/*    selected={jobDetails.startDate}*/}
+                                        {/*    onChange={date => this.handleChangeDate(date, "startDate")}*/}
+                                        {/*    minDate={new Date()}*/}
+                                        {/*/>*/}
                                         <DatePicker
-                                            selected={jobDetails.startDate}
+                                            selected={
+                                                jobDetails.startDate instanceof Date && !isNaN(jobDetails.startDate)
+                                                    ? jobDetails.startDate
+                                                    : null
+                                            }
                                             onChange={date => this.handleChangeDate(date, "startDate")}
-                                            minDate={moment()}
+                                            minDate={new Date()}
                                         />
                                     </div>
                                     <div className="summary">
                                         End Date:
                                         <br />
-                                        <DatePicker
-                                            selected={jobDetails.endDate}
+                                        {/*<DatePicker*/}
+                                        {/*    selected={jobDetails.endDate}*/}
+                                        {/*    onChange={date => this.handleChangeDate(date, "endDate")}*/}
+                                        {/*    minDate={new Date()}*/}
+                                        {/*/>*/}<DatePicker
+                                            selected={
+                                                jobDetails.endDate instanceof Date && !isNaN(jobDetails.endDate)
+                                                    ? jobDetails.endDate
+                                                    : null
+                                            }
                                             onChange={date => this.handleChangeDate(date, "endDate")}
-                                            minDate={moment()}
+                                            minDate={new Date()}
                                         />
                                     </div>
                                     <div className="summary">
                                         *Expiry Date:
                                         <br />
+                                        {/*<DatePicker*/}
+                                        {/*    selected={expiryDate}*/}
+                                        {/*    onChange={date => this.handleChangeDate(date, "expiryDate")}*/}
+                                        {/*    minDate={new Date()}*/}
+                                        {/*/>*/}
                                         <DatePicker
                                             selected={expiryDate}
                                             onChange={date => this.handleChangeDate(date, "expiryDate")}
-                                            minDate={moment()}
+                                            minDate={new Date()}
                                         />
                                     </div>
                                 </div>

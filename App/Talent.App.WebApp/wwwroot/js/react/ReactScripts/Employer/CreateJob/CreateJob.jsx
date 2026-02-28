@@ -105,7 +105,7 @@ export default class CreateJob extends React.Component {
         console.log("date:", jobData.jobDetails.startDate);
         var cookies = Cookies.get('talentAuthToken');   
         $.ajax({
-            url: 'http://localhost:51689/listing/Listing/createUpdateJob',
+            url: 'http://localhost:51689/listing/listing/CreateUpdateJob',
             headers: {
                 'Authorization': 'Bearer ' + cookies,
                 'Content-Type': 'application/json'
